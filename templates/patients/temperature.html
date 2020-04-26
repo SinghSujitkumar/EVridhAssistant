@@ -1,0 +1,230 @@
+{% extends 'patient_base.html'%}
+{% load static%}
+{% block content%}
+<section class="section section-visitors blue lighten-4">
+        <div class="row">
+            <!-- Chart -->
+            <div class="col-md-9">
+                <div class="card-panel">
+                    <canvas id="chartContainer" style="height: 370px; width: 100%;"></canvas>
+                </div>
+            </div>
+            <!-- Latest Comments -->
+    
+            <div class="col-md-3">
+                <ul class="collection with-header latest-comments">
+                    <li class="collection-header">
+                        <h5 style="text-align:center;color:black;">Vishandas Mehta</h5>
+                    </li>
+                    <li class="collection-item avatar">Vishandas Mehta
+                        <br>
+                            <img src="{% static 'images/patient.jpg' %}" alt="Vishandas Mehta" class="circle">
+                        <span class="title">Average Body-Temperature </span>
+                        <p id="avg-temperature"></p>
+                        <!-- we use the truncate class when we want to show some of the words, not all words because comments can be pretty large -->
+                        <div class="container">
+                            <div class="progress">
+                              <div class="progress-bar bg-success"  style="height:20px; width:40%">
+                                96.1-100
+                              </div>
+                              <div class="progress-bar bg-warning" style=" height:20px; width:10%">
+                                100 < 
+                              </div>
+                            </div>
+                          </div>
+                    </li>
+                </ul>
+                <ul class="collection with-header latest-comments">
+                    <li class="collection-header">
+                        <h5>Details By Week</h5>
+                        <h6>Select Month</h6>
+                        <select name="" id="">
+                            <option value="">Jan</option>
+                            <option value="">Feb</option>
+                            <option value="">Mar</option>
+                            <option value="">Apr</option>
+                            <option value="">May</option>
+                            <option value="">Jun</option>
+                            <option value="">Jul</option>
+                            <option value="">Aug</option>
+                            <option value="">Sep</option>
+                            <option value="">Oct</option>
+                            <option value="">Nov</option>
+                            <option value="">Dec</option>
+                        </select>
+                    </li>
+                    <li class="collection-item avatar">
+                         <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 1</span>
+                        <p class="temperature-grade blue-text">Good</p>
+                    </li>
+                    <li class="collection-item avatar">
+                         <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 2</span>
+                        <p class="temperature-grade">Average</p>
+                    </li>
+                    <li class="collection-item avatar">
+                            <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 3</span>
+                        <p class="temperature-grade blue-text">Good</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--END MAIN TEMPERATURE PATTERN DETECTION SECTION-->
+    
+    <!-- PRELOADER -->
+    <div class="loader preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/chart.js"></script> -->
+    <script>
+        // Custom JS & jQuery here
+        // HIDE SECTIONS
+        $('section').hide();
+        $('footer').hide();
+        $('.fixed-action-btn').hide();
+        // hiding all the sections initially so we can show the preloader
+        setTimeout(function () {
+            $(document).ready(function () {
+                // SHOW SECTIONS
+                $('section').fadeIn();
+                $('footer').fadeIn();
+                $('.fixed-action-btn').fadeIn();
+                // HIDE PRELOADER
+                $('.loader').fadeOut();
+                // SIDENAV INIT
+                $('.button-collapse').sideNav();
+                // MODAL INIT
+                $('.modal').modal();
+                // SELECT INIT
+                $('select').material_select();
+                // COUNTER
+                $('.count').each(function () {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                        // $(this).text() takes the number, so whatever in this text is
+                    }, {
+                        duration: 1000,
+                        // in 1s goes from 0 to the number
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+                // COMMENTS - APPROVE & DENY
+                $('.approve').click(function (e) {
+                    Materialize.toast('Comment Approved', 3000);
+                    e.preventDefault();
+                    // it's a link so we want to stop the default behaviour
+                });
+                $('.deny').click(function (e) {
+                    Materialize.toast('Comment Denied', 3000);
+                    e.preventDefault();
+                    // it's a link so we want to stop the default behaviour
+                });
+            });
+            // QUICK TODOS
+            $('#todo-form').submit(function (e) {
+                // console.log($('#todo').val());
+                const output = `
+          <li class="collection-item">
+            <div>${$('#todo').val()}
+              <a href="#" class="secondary-content delete">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+          </li>
+        `;
+                // in the output variable we're storing what the user has entered in the input filed
+                $('.todos').append(output);
+                // appending to our todo list so it shows in the UI
+                $('#todo').val('');
+                // clear input field
+                Materialize.toast('Todo Added', 3000);
+                // show a notification that the todo has been added
+                e.preventDefault();
+                // we want to prevent the form from actually submiting
+            });
+            // DELETE TODOS
+            $('.todos').on('click', '.delete', function (e) {
+                // $(this).parent().parent().remove();
+                $(this).parent().parent().animate().fadeOut();
+                // event delegation
+                Materialize.toast('Todo Removed', 3000);
+                // show a notification that the todo has been deleted
+                e.preventDefault();
+            });
+            // FOR THE CKEDITOR
+            CKEDITOR.replace('body');
+        }, 1000);
+        // PRELOADER
+        /********************************************************************************/
+        //CHARTS
+        /********************************************************************************/
+        var data =  [97,98, 98, 100, 99, 101, 98];
+        var sum = 0;
+        for(var i=0; i<data.length; i++){
+            sum += data[i];
+        }
+        var avg = parseInt(sum/data.length);
+        $('p#avg-temperature').html(avg + " F");
+        var ctx = document.getElementById("chartContainer");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                datasets: [{
+                    label: 'Body-temperature Rate',
+                    data: [97,98, 98, 100, 99, 101, 98],
+                    backgroundColor:
+                        'rgba(54, 162, 235, 0.2)',
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            max: 102,
+                            min:95 ,
+                            stepSize: 1,
+                        }
+                    }]
+                }
+            }
+        });
+        /********************************************************************************/
+        //END OF CHARTS
+        /********************************************************************************/
+    </script>
+
+
+{% endblock %}

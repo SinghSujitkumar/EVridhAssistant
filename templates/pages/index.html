@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" style='background-image: url( "{% static 'images/cover_1.jpg' %}" );'>
+
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">eVriddhaAssistant</h2>
+                    <p class="lead"><b>eVriddhaAssistant innovations in artificial intelligence and data analytics enables
+                            palliative care to empower the senior citizens and their caretakers for independent
+                            lifestyle.</b>
+                </div>
+            </div>
+
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <!-- <div class="carousel-item" style='background-image:url( "{% static '/images/help2.jpg' %}" );'>
+                <div class="carousel-caption d-none d-md-block">
+                  <h2 class="display-4">Objectives</h2>
+                  <p class="lead" ><b>The need for changing the attitude of service providers as well as behavioural
+                    change in the community through public awareness.
+                </div>
+              </div> -->
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style ='background-image:url( "{% static 'images/help2.jpg' %}" );'>
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">Objectives</h2>
+                    <p class="lead"><b>The need for changing the attitude of service providers as well as behavioural
+                            change in the community through public awareness.
+                </div>
+            </div>
+            <div class="carousel-item" style='background-image:url( "{% static 'images/help.jpg' %}" );'>
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">Objectives</h2>
+                    <p class="lead"><b>The need for changing the attitude of service providers as well as behavioural
+                            change in the community through public awareness.
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="mtrue"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+<!-- Services -->
+
+<section class="serve">
+    <div class="container">
+        <div style="text-align: center; padding:10px;">
+            <img src="{% static 'images/services.jpg' %}" style="width:5%;height:10%;" class="image-center">
+            <h1>Other Services</h1>
+        </div>
+        <div class="row">
+            <div class="flip-card col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{% static 'images/service_2.jpg' %}" alt="Avatar" style="width:100%;height:100%;">
+                    </div>
+                    <div class="flip-card-back">
+                        <br>
+                        <h2 style="text-align: center;color: black">Blood Bank Services</h2>
+                        <br>
+                        <p style="font-size:20">We solve the problem of blood emergencies by connecting blood donors
+                            directly with people in blood need.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card col-xl-4 col-lg-4  col-md-4 col-sm-12">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{% static 'images/service_5.gif' %}" alt="Avatar" style="width:100%;height:100%;">
+                    </div>
+                    <div class="flip-card-back">
+                        <br>
+                        <h2 style="color: black">Community Connect</h2>
+                        <br>
+                        <p style="font-size:20">Ever growing active community of technologists.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                            <img src="{% static 'images/service_4.jpg' %}" alt="Avatar" style="width:100%;height:100%;">
+                    </div>
+                    <div class="flip-card-back">
+                        <br>
+                        <h1 style="text-align: center;color: #000;">Assistance</h1>
+                        <br>
+                        <p style="font-size:20">We provide 24/7 assistance in every situation.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br><br>
+
+</section>
+
+<section id="charts">
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="s_heading">Need of the hour</h3>
+                <p class="s_text">Improvement in medical science has increased the longetivity of life and india is no
+                    exception!. Elderly people are not that active and hence it gets difficult to keep a record of their
+                    previous illnesses. Thus the doctors sometimes fail to determine the true picture of the patients's
+                    illness.</p>
+            </div>
+            <div class="col-md-6">
+                <!--Video-->
+                <div class="embed-responsive embed-responsive-16by9 hoverable">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/scauDEM9SYI"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <br>
+            </div>
+            <!--Grid column-->
+
+        </div>
+    </div>
+</section>
+
+
+<br>
+<br>
+
+
+<!-- Counter -->
+<div class="counter" id="cnt">
+    <div class="container">
+        <div class="row">
+            <br />
+            <div class="col text-center">
+                <h2>Our Progress</h2>
+                <p>You rise only by lifting others!</p>
+            </div>
+
+
+
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <div class="counter">
+                    <i class="fas fa-users"></i>
+                    <h2 class="timer count-title count-number" data-to="100" data-speed="1500"></h2>
+                    <p class="count-text">Volunteers</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class='far fa-grin-beam' style='font-size:36px'></i>
+                    <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
+                    <p class="count-text ">Happy Clients</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class="fa fa-wheelchair" style="font-size:36px;"></i>
+                    <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
+                    <p class="count-text ">Patients Treated</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class="material-icons" style="font-size:36px">streetview</i>
+                    <h2 class="timer count-title count-number" data-to="63" data-speed="1500"></h2>
+                    <p class="count-text ">Cities</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Contact Us -->
+<div class="container contact-form">
+    <div class="contact-image">
+        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact" />
+    </div>
+    <form method="post">
+        <br>
+        <h3>Contact Us</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *"
+                        value="" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea name="txtMsg" class="form-control" placeholder="Your Message *"
+                        style="height: 150px;"></textarea>
+                </div>
+            </div>
+            <div style="text-align: center;" class="form-group">
+                <input type="submit" name="btnSubmit" class="btn btn-danger" style="margin-left:5px;"
+                    value="Send Message " />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+{%endblock%}

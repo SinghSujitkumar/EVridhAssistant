@@ -1,0 +1,282 @@
+{% extends 'patient_base.html'%}
+{% load static%}
+{% block content%}
+<section class="section section-visitors blue lighten-4">
+        <div class="row">
+            <!-- Chart -->
+            <div class="col-md-9">
+                
+                    <div id="chartContainer" style="width: 100%;"></div>
+                
+            </div>
+            <!-- Latest Comments -->
+    
+            <div class="col-md-3">
+                <ul class="collection with-header latest-comments">
+                    <li class="collection-header">
+                        <h5>Vishandas Mehta</h5>
+                    </li>
+                    <li class="collection-item avatar">
+                            <img src="{% static 'images/patient.jpg' %}" alt="Vishandas Mehta" class="circle">
+                        <span class="title">Average Sleep Time of Current</span>
+                        <p id="avg-sleep"></p>
+                        <!-- we use the truncate class when we want to show some of the words, not all words because comments can be pretty large -->
+                        <div class="container">
+                            <div class="progress">
+                              <div class="progress-bar bg-success" style="width:40%;height:100%">
+                                <b>8-9 hrs</b>
+                              </div>
+                              <div class="progress-bar bg-warning" style="width:40%;height:100%">
+                                <b>10 ></b>
+                              </div>
+                            </div>
+                          </div>
+                    </li>
+                </ul>
+                <ul class="collection with-header latest-comments">
+                    <li class="collection-header">
+                        <h5>Details By Week</h5>
+                        <h6>Select Month</h6>
+                        <select name="" id="">
+                            <option value="">Jan</option>
+                            <option value="">Feb</option>
+                            <option value="">Mar</option>
+                            <option value="">Apr</option>
+                            <option value="">May</option>
+                            <option value="">Jun</option>
+                            <option value="">Jul</option>
+                            <option value="">Aug</option>
+                            <option value="">Sep</option>
+                            <option value="">Oct</option>
+                            <option value="">Nov</option>
+                            <option value="">Dec</option>
+                        </select>
+                    </li>
+                    <li class="collection-item avatar">
+                            <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 1</span>
+                        <p class="sleep-grade blue-text">Good</p>
+                    </li>
+                    <li class="collection-item avatar">
+                            <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 2</span>
+                        <p class="sleep-grade">Average</p>
+                    </li>
+                    <li class="collection-item avatar">
+                            <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 3</span>
+                        <p class="sleep-grade blue-text">Good</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--END MAIN SLEEP PATTERN DETECTION SECTION-->
+    
+    <!-- PRELOADER -->
+    <div class="loader preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+    window.onload = function () {
+    
+    var mychart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Weekly Sleep Data"
+        },
+        axisX: {
+            valueFormatString: "DDDD"
+        },
+        axisY: {
+            
+            labelFormatter: addSymbols
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            itemclick: toggleDataSeries
+        },
+        data: [
+        {
+            type: "column",
+            name: "Hours Slept",
+            showInLegend: true,
+            xValueFormatString: " DDDD ",
+            yValueFormatString: "#,##0",
+            dataPoints: [
+                { x: new Date(2016, 0,1), y: 8},
+                { x: new Date(2016, 0,2), y: 9 },
+                { x: new Date(2016, 0,3), y: 10 },
+                { x: new Date(2016, 0,4), y: 9, indexLabel: "" },
+                { x: new Date(2016, 0,5), y: 9 },
+                { x: new Date(2016, 0,6), y: 11 }
+                
+            ]
+        }, 
+        {
+            type: "line",
+            name: "Times woke up",
+            showInLegend: true,
+            yValueFormatString: "#,##0",
+            dataPoints: [
+                { x: new Date(2016, 0,1),y:2 },
+                { x: new Date(2016, 0,2), y: 1 },
+                { x: new Date(2016, 0,3),y: 1 },
+                { x: new Date(2016, 0,4), y: 0 },
+                { x: new Date(2016, 0,5), y: 2 },
+                { x: new Date(2016, 0,6), y: 1 },
+                { x: new Date(2016, 0,7), y: 3 }
+                
+            ]
+        },
+        {
+            type: "area",
+            name: "Deep sleep ",
+            markerBorderColor: "white",
+            markerBorderThickness: 2,
+            showInLegend: true,
+            yValueFormatString: "#,##0",
+            dataPoints: [
+                { x: new Date(2016, 0,1), y: 7 },
+                { x: new Date(2016, 0,2), y: 6 },
+                { x: new Date(2016, 0,3), y: 7},
+                { x: new Date(2016, 0,4), y: 7},
+                { x: new Date(2016, 0,5), y: 5},
+                { x: new Date(2016, 0,6), y: 6 },
+                { x: new Date(2016, 0,7), y: 8 }
+                
+            ]
+        }]
+    });
+    mychart.render();
+    
+    function addSymbols(e) {
+        var suffixes = ["", "K", "M", "B"];
+        var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+    
+        if(order > suffixes.length - 1)                	
+            order = suffixes.length - 1;
+    
+        var suffix = suffixes[order];      
+        return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
+    }
+    
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.mychart.render();
+    }
+    
+    }
+    </script>
+    <script>
+        // Custom JS & jQuery here
+        // HIDE SECTIONS
+        $('section').hide();
+        $('footer').hide();
+        $('.fixed-action-btn').hide();
+        // hiding all the sections initially so we can show the preloader
+        setTimeout(function () {
+            $(document).ready(function () {
+                // SHOW SECTIONS
+                $('section').fadeIn();
+                $('footer').fadeIn();
+                $('.fixed-action-btn').fadeIn();
+                // HIDE PRELOADER
+                $('.loader').fadeOut();
+                // SIDENAV INIT
+                $('.button-collapse').sideNav();
+                // MODAL INIT
+                $('.modal').modal();
+                // SELECT INIT
+                $('select').material_select();
+                // COUNTER
+                $('.count').each(function () {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                        // $(this).text() takes the number, so whatever in this text is
+                    }, {
+                        duration: 1000,
+                        // in 1s goes from 0 to the number
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+                // COMMENTS - APPROVE & DENY
+                $('.approve').click(function (e) {
+                    Materialize.toast('Comment Approved', 3000);
+                    e.preventDefault();
+                    // it's a link so we want to stop the default behaviour
+                });
+                $('.deny').click(function (e) {
+                    Materialize.toast('Comment Denied', 3000);
+                    e.preventDefault();
+                    // it's a link so we want to stop the default behaviour
+                });
+            });
+            // QUICK TODOS
+            $('#todo-form').submit(function (e) {
+                // console.log($('#todo').val());
+                const output = `
+          <li class="collection-item">
+            <div>${$('#todo').val()}
+              <a href="#" class="secondary-content delete">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+          </li>
+        `;
+                // in the output variable we're storing what the user has entered in the input filed
+                $('.todos').append(output);
+                // appending to our todo list so it shows in the UI
+                $('#todo').val('');
+                // clear input field
+                Materialize.toast('Todo Added', 3000);
+                // show a notification that the todo has been added
+                e.preventDefault();
+                // we want to prevent the form from actually submiting
+            });
+            // DELETE TODOS
+            $('.todos').on('click', '.delete', function (e) {
+                // $(this).parent().parent().remove();
+                $(this).parent().parent().animate().fadeOut();
+                // event delegation
+                Materialize.toast('Todo Removed', 3000);
+                // show a notification that the todo has been deleted
+                e.preventDefault();
+            });
+            // FOR THE CKEDITOR
+            CKEDITOR.replace('body');
+        }, 1000);
+        // PRELOADER
+        /********************************************************************************/
+        //CHARTS
+        /********************************************************************************/
+        var data =  [9, 8, 9, 8, 7, 10, 11];
+        var sum = 0;
+        for(var i=0; i<data.length; i++){
+            sum += data[i];
+        }
+        var avg = parseInt(sum/data.length);
+        $('p#avg-sleep').html(avg + " Hours");
+    </script>
+{% endblock %}

@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/design.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <title>VridhSeva</title>
+</head>
+
+<body></body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}" style="font-size: 25px;"><img src="{% static 'images/logo.png' %}"
+                style="height: 70px; padding:8px; color: transparent;" alt=""> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+               
+                        <li class="nav-item active text-red">
+                                <a class="nav-link" href="{% url  'patients_dashboard' %}">Patients</a>
+                            </li>
+    
+                <li class="nav-item active text-red">
+                        <a class="nav-link" href="{% url 'doctor_index' %}">Doctor</a>
+                    </li>
+                <li class="nav-item active text-red">
+                    <a class="nav-link" href="{% url  'patients_dashboard' %}">Relatives</a>
+                </li>
+                <li class="nav-item active text-red">
+                    <a class="nav-link" href="{% url  'about' %}">About Us</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url  'wearables' %}">Wearables</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="google_translate_element"></div>
+</nav>
+
+
+{% block content%}{% endblock %}
+
+
+<!-- Footer -->
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                <p style="color:aliceblue;text-align: center;">Vriddh Panel Copyright &copy; 2019</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ./Footer -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en'
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script src="./count.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="{% static 'js/charts.js' %}"></script>
+<script src="{% static 'js/counter.js' %}"></script>
+<script src="{% static 'js/jquery-1.10.1.min.js' %}"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="{% static 'js/myScript.js' %}"></script>
+<script>
+    document.getElementById("cnt").onload = function () {
+        myFunction()
+    };
+    var barChart = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Dataset 1',
+            data: [10, 15, 20, 1, 3, 5],
+            backgroundColor: 'rgb(23, 125, 255)',
+        }],
+
+
+    };
+    window.onload = function () {
+        var ctx = document.getElementById('#barChart').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart - Stacked'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        });
+    };
+
+
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [10, 20, 20, 10],
+                backgroundColor: ['rgb(23, 125, 255)', 'rgb(13, 175, 55)', 'rgb(93, 25, 25)',
+                    'rgb(27, 12, 25)'
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: [
+                'Red',
+                'Orange',
+                'Yellow',
+                'Green'
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                labels: {
+                    fontColor: "white",
+                    fontSize: 18
+                }
+            }
+
+        }
+    };
+</script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+    "python.pythonPath": "C:\\Users\\aditya\\Anaconda3\\python.exe",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#a4b7d8",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#b24d72",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "titleBar.activeBackground": "#809bc9",
+        "titleBar.inactiveBackground": "#809bc999",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveForeground": "#15202b99",
+        "statusBar.background": "#809bc9",
+        "statusBarItem.hoverBackground": "#5c7fba",
+        "statusBar.foreground": "#15202b"
+    }
+}

@@ -1,0 +1,286 @@
+{% extends 'patient_base.html'%}
+{% load static%}
+{% block content%}
+
+<!--MAIN HEART-RATE PATTERN DETECTION SECTION-->
+<section class="section section-visitors blue lighten-4">
+        <div class="row">
+            <!-- Chart -->
+            <div class="col-md-9">
+                <div class="card-panel">
+                   <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                </div>
+            </div>
+    
+    
+            <!-- Latest Comments -->
+    
+            <div class="col-md-3">
+                <ul class="collection with-header latest-comments">
+                    <li class="collection-header">
+                        <h5>Details</h5>
+                    </li>
+                    <li class="collection-item avatar">
+                            <img src="{% static 'images/patient.jpg' %}" alt="Vishandas Mehta" class="circle">
+                        <span class="title">Average Heart-Rate (in bpm)</span>
+                        <p id="avg-heartrate"></p>
+                        <!-- we use the truncate class when we want to show some of the words, not all words because comments can be pretty large -->
+                        <div class="container">
+                            <div class="progress">
+                              <div class="progress-bar bg-success" style="width:40%;height:100%">
+                                <b>60-100</b>
+                              </div>
+                              <div class="progress-bar bg-warning" style="width:40%;height:100%">
+                                <b>100 ></b>
+                              </div>
+                            </div>
+                          </div>
+                    </li>
+                </ul>
+                <ul class="collection with-header latest-comments">
+                    <li class="collection-header">
+                        <h5>Details By Week</h5>
+                        <h6>Select Month</h6>
+                        <select name="" id="">
+                            <option value="">Jan</option>
+                            <option value="">Feb</option>
+                            <option value="">Mar</option>
+                            <option value="">Apr</option>
+                            <option value="">May</option>
+                            <option value="">Jun</option>
+                            <option value="">Jul</option>
+                            <option value="">Aug</option>
+                            <option value="">Sep</option>
+                            <option value="">Oct</option>
+                            <option value="">Nov</option>
+                            <option value="">Dec</option>
+                        </select>
+                    </li>
+                    <li class="collection-item avatar">
+                         <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 1</span>
+                        <p class="heartrate-grade blue-text">Good</p>
+                    </li>
+                    <li class="collection-item avatar">
+                         <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 2</span>
+                        <p class="heartrate-grade">Average</p>
+                    </li>
+                    <li class="collection-item avatar">
+                         <img src="{% static  'images/doc.png' %}" alt="John Doe" class="circle">
+                        <span class="title">Week 3</span>
+                        <p class="heartrate-grade blue-text">Good</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--END MAIN HEART-RATE PATTERN DETECTION SECTION-->
+    
+    <!-- PRELOADER -->
+    <div class="loader preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    
+<!--     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/chart.js"></script> -->
+    
+    <script>
+    
+    
+        // Custom JS & jQuery here
+        // HIDE SECTIONS
+        $('section').hide();
+        $('footer').hide();
+        $('.fixed-action-btn').hide();
+        // hiding all the sections initially so we can show the preloader
+        setTimeout(function () {
+            $(document).ready(function () {
+                // SHOW SECTIONS
+                $('section').fadeIn();
+                $('footer').fadeIn();
+                $('.fixed-action-btn').fadeIn();
+                // HIDE PRELOADER
+                $('.loader').fadeOut();
+                // SIDENAV INIT
+                $('.button-collapse').sideNav();
+                // MODAL INIT
+                $('.modal').modal();
+                // SELECT INIT
+                $('select').material_select();
+                // COUNTER
+                $('.count').each(function () {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                        // $(this).text() takes the number, so whatever in this text is
+                    }, {
+                        duration: 1000,
+                        // in 1s goes from 0 to the number
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+                // COMMENTS - APPROVE & DENY
+                $('.approve').click(function (e) {
+                    Materialize.toast('Comment Approved', 3000);
+                    e.preventDefault();
+                    // it's a link so we want to stop the default behaviour
+                });
+                $('.deny').click(function (e) {
+                    Materialize.toast('Comment Denied', 3000);
+                    e.preventDefault();
+                    // it's a link so we want to stop the default behaviour
+                });
+            });
+            // QUICK TODOS
+            $('#todo-form').submit(function (e) {
+                // console.log($('#todo').val());
+                const output = `
+          <li class="collection-item">
+            <div>${$('#todo').val()}
+              <a href="#" class="secondary-content delete">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+          </li>
+        `;
+                // in the output variable we're storing what the user has entered in the input filed
+                $('.todos').append(output);
+                // appending to our todo list so it shows in the UI
+                $('#todo').val('');
+                // clear input field
+                Materialize.toast('Todo Added', 3000);
+                // show a notification that the todo has been added
+                e.preventDefault();
+                // we want to prevent the form from actually submiting
+            });
+            // DELETE TODOS
+            $('.todos').on('click', '.delete', function (e) {
+                // $(this).parent().parent().remove();
+                $(this).parent().parent().animate().fadeOut();
+                // event delegation
+                Materialize.toast('Todo Removed', 3000);
+                // show a notification that the todo has been deleted
+                e.preventDefault();
+            });
+            // FOR THE CKEDITOR
+            CKEDITOR.replace('body');
+        }, 1000);
+        // PRELOADER
+    
+        
+        window.onload = function () {
+    
+    var dps = []; // dataPoints
+    var chart = new CanvasJS.Chart("chartContainer", {
+        title :{
+            text: "Dynamic Data"
+        },
+        axisY: {
+            includeZero: false
+        },      
+        data: [{
+            type: "line",
+            dataPoints: dps
+        }]
+    });
+    
+    var xVal = 0;
+    var yVal = 70; 
+    var updateInterval = 1000;
+    var dataLength = 20; // number of dataPoints visible at any point
+    
+    var updateChart = function (count) {
+    
+        count = count || 1;
+    
+        for (var j = 0; j < count; j++) {
+            yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+            dps.push({
+                x: xVal,
+                y: yVal
+            });
+            xVal++;
+        }
+    
+        if (dps.length > dataLength) {
+            dps.shift();
+        }
+    
+        chart.render();
+    };
+    
+    updateChart(dataLength);
+    setInterval(function(){updateChart()}, updateInterval);
+    
+    }
+    
+    
+        // /********************************************************************************/
+    
+        // //CHARTS
+        // /********************************************************************************/
+        // var data =  [67,73, 84, 77,79, 87, 98];
+        // var sum = 0;
+        // for(var i=0; i<data.length; i++){
+        //     sum += data[i];
+        // }
+        // var avg = parseInt(sum/data.length);
+        // $('p#avg-heartrate').html(avg + " ");
+        // var ctx = document.getElementById("chartContainer");
+        // var myChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        //         datasets: [{
+        //             label: 'Heart-Rate',
+        //             data: [67,73, 84, 77,79, 87, 98],
+        //             backgroundColor:
+        //                 'rgba(54, 162, 235, 0.2)',
+        //             borderColor: [
+        //                 'rgba(54, 162, 235, 1)',
+        //             ],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     max: 120,
+        //                     min:45 ,
+        //                     stepSize: 5,
+        //                 }
+        //             }]
+        //         }
+        //     }
+        // });
+        // /********************************************************************************/
+        // //END OF CHARTS
+        // /********************************************************************************/
+    </script>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static%}
+{%block content%}
+<br><br><br>
+
+<!-- Product One -->
+<br>
+<div class="card mb-3" style="padding:20px;">
+    <img src="{% static 'images/wear1.jpg' %}" class="card-img-top text-center" style="width:100%;height:10%;">
+    <div class="card-body">
+        <h5 class="card-title">Smart Watch</h5>
+        <p class="card-text">This watch protects your loved one's, and if they stumble over anything this watch will
+            inform you rightaway</p>
+    </div>
+</div>
+<div class="card mb-3" style="padding:20px;">
+    <img src="{% static 'images/wear2.jpg' %}" class="card-img-top text-center" style="width:100%;height:10%;">
+    <div class="card-body">
+        <h5 class="card-title">Smart Watch</h5>
+        <p class="card-text">This watch protects your loved one's, and if they stumble over anything this watch will
+            inform you rightaway</p>
+    </div>
+</div>
+
+<!-- Product One -->
+<div class="card mb-3" style="max-width: 100%; background-color:black; color:white;">
+    <br>
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align:center;">Key Features</h5>
+                <ul>
+                    <li>2.4 GHz Speed</li>
+                    <li>Tiny Circuits </li>
+                    <li>TinyDuino</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/w2.png' %}" class="card-img" alt="...">
+        </div>
+        <div class="col-md-4">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align:center;">Key Features</h5>
+                <ul>
+
+                    <li>Bluetooth Low Energy</li>
+                    <li>TinyCircuits Accelerometer Tinyshield</li>
+                    <li>TinySHield USB</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<div class="card mb-3" style="max-width: 100%;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="{% static 'images/wear4.jpg' %}" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Health-o-Meter</h5>
+                <p class="card-text">helps you live a healthy, balanced life by tracking your all-day activity,
+                    exercise, sleep and weight..</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRELOADER -->
+<div class="loader preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+            <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+            <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
